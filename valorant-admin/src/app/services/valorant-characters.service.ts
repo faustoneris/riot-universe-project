@@ -8,9 +8,6 @@ export class CharacterService {
     constructor(private http: HttpClient) { }
 
     async findCharacters() {
-        return this.http.get<any>(`${CHARACTER_API}`)
-            .subscribe(response => {
-                console.log(response);
-            });
+        return this.http.get<any>(`${CHARACTER_API}`).subscribe(response => {console.log(response);});
     }
 }

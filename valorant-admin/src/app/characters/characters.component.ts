@@ -14,6 +14,7 @@ constructor(private readonly characters: CharacterService) {}
 charactersFrom: any = []; 
 
   async ngOnInit(): Promise<void> {
-    await this.characters.findCharacters(); 
+    const char = await this.characters.findCharacters(); 
+    this.charactersFrom = char; 
   }
 }

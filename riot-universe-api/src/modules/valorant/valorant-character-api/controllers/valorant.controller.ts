@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { CharacterDto } from '../dtos/valorant-character.dto';
 import { ValorantService } from '../service/valorant.service';
 
-@Controller()
+@Controller('valorant')
 export class ValorantController {
   constructor(private readonly valorantService: ValorantService) {}
   

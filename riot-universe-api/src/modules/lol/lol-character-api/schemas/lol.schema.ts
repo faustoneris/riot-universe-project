@@ -4,7 +4,7 @@ import { CharacterSkills } from "../dtos/lol-character-skills.dto";
 import { CharacterSkins } from "../dtos/lol-character-skins.dto";
 
 @Schema() 
-export class LolCharacters extends Document { 
+export class LolHero extends Document { 
     @Prop()
     name: string
 
@@ -16,8 +16,16 @@ export class LolCharacters extends Document {
 
     @Prop()
     characterSkills: CharacterSkills
+
+    constructor(hero?: Partial<LolHero>) {
+        super();
+        this.name = hero.name; 
+        this.lore = hero.lore; 
+        this.characterSkills = hero.characterSkills; 
+        this.characterSkins = hero.characterSkins; 
+    }
 }
 
-export const LolCharacterSchema = SchemaFactory.createForClass(LolCharacters);
+export const LolCharacterSchema = SchemaFactory.createForClass(LolHero);
 
  

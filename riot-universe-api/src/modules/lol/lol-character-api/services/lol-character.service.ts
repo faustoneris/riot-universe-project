@@ -1,24 +1,28 @@
 import { Injectable } from "@nestjs/common";
-import { LolCharactersDto } from "../dtos/lol-character.dto";
+import { LolHerosDto } from "../dtos/lol-character.dto";
 import { CharacterRepository } from "../repository/lol-character.repository";
-import { LolCharacters } from "../schemas/lol.schema";
+import { LolHero } from "../schemas/lol.schema";
 
 
 @Injectable()
-export class LolCharacterService { 
-    
+export class LolCharacterService {
     constructor(private readonly characterRepository: CharacterRepository) {}
 
-    async findAllCharacters(): Promise<LolCharactersDto[]> { 
-        return await this.characterRepository.findAllCharacters(); 
+    async findAllCharacters(): Promise<LolHerosDto[]> { 
+        return await this.characterRepository.fetchAllHeros(); 
     }
 
-    async createCharacter(character: LolCharactersDto): Promise<void> {
+    async createHero(character: LolHerosDto): Promise<LolHerosDto> {
         this.Validate(character); 
-        return await this.characterRepository.createCharacter(character); 
+        return await this.characterRepository.createHero(character); 
     }
 
-    private Validate(character: LolCharactersDto): void {         
+    async findHeroByName(name: string): Promise<LolHerosDto> {
+        return await this.characterRepository.findHeroByName(name); 
+    } 
+
+
+    private Validate(character: LolHerosDto): void {         
         if (!character) { 
             throw new Error("Preencha os dados antes de salvar o personagem."); 
         }

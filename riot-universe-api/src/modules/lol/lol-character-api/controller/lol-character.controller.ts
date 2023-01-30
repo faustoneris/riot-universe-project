@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
-import { LolCharactersDto } from '../dtos/lol-character.dto';
+import { LolHerosDto } from '../dtos/lol-character.dto';
 import { LolCharacterService } from "../services/lol-character.service";
 
 
@@ -8,12 +8,17 @@ export class LolCharacterController {
     constructor(private readonly lolCharacterService: LolCharacterService) {}
 
     @Get()
-    async findAllCharacters(): Promise<LolCharactersDto[]> { 
+    async fetchAllHeros(): Promise<LolHerosDto[]> { 
         return await this.lolCharacterService.findAllCharacters(); 
     }
 
+    @Get(":name")
+    async findHeroByName(@Param('name') name: string): Promise<LolHerosDto> {
+        return await this.lolCharacterService.findHeroByName(name); 
+    }
+
     @Post()
-    async createCharacter(@Body() character: LolCharactersDto): Promise<void> { 
-        await this.lolCharacterService.createCharacter(character); 
+    async createHero(@Body() character: LolHerosDto): Promise<LolHerosDto> { 
+       return await this.lolCharacterService.createHero(character); 
     }
 }
